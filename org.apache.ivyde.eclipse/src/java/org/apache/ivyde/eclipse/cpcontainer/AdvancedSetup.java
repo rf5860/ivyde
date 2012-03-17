@@ -22,6 +22,8 @@ public class AdvancedSetup {
     private boolean resolveBeforeLaunch;
 
     private boolean useExtendedResolveId;
+    
+    private boolean useCustomDownloader;
 
     public AdvancedSetup() {
         // default constructor
@@ -30,6 +32,7 @@ public class AdvancedSetup {
     public void set(AdvancedSetup setup) {
         this.resolveBeforeLaunch = setup.resolveBeforeLaunch;
         this.useExtendedResolveId = setup.useExtendedResolveId;
+        this.useCustomDownloader = setup.useCustomDownloader;
     }
 
     public boolean isResolveBeforeLaunch() {
@@ -43,8 +46,16 @@ public class AdvancedSetup {
     public boolean isUseExtendedResolveId() {
         return useExtendedResolveId;
     }
+    
+    public boolean isUseCustomDownloader() {
+        return useCustomDownloader;
+    }
 
     public void setUseExtendedResolveId(boolean useExtendedResolveId) {
         this.useExtendedResolveId = useExtendedResolveId;
+    }
+    
+    public void setUseCustomDownloader(boolean useCustomDownloader) {
+        this.useCustomDownloader = useCustomDownloader;
     }
 }

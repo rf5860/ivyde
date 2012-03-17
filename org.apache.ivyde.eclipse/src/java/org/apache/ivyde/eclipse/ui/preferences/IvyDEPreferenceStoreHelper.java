@@ -139,6 +139,8 @@ public class IvyDEPreferenceStoreHelper {
                 .getBoolean(PreferenceConstants.RESOLVE_BEFORE_LAUNCH));
         setup.setUseExtendedResolveId(prefStore
                 .getBoolean(PreferenceConstants.USE_EXTENDED_RESOLVE_ID));
+        setup.setUseCustomDownloader(prefStore
+                .getBoolean(PreferenceConstants.USE_CUSTOM_DOWNLOADER));
         return setup;
     }
 
@@ -147,6 +149,8 @@ public class IvyDEPreferenceStoreHelper {
                 .setValue(PreferenceConstants.RESOLVE_BEFORE_LAUNCH, setup.isResolveBeforeLaunch());
         prefStore.setValue(PreferenceConstants.USE_EXTENDED_RESOLVE_ID,
             setup.isUseExtendedResolveId());
+        prefStore.setValue(PreferenceConstants.USE_CUSTOM_DOWNLOADER,
+                setup.isUseCustomDownloader());
     }
 
     public String getOrganization() {

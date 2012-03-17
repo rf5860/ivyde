@@ -113,12 +113,15 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
     public static final boolean DEFAULT_RESOLVE_BEFORE_LAUNCH = false;
 
     public static final boolean DEFAULT_USE_EXTENDED_RESOLVE_ID = false;
+    
+    public static final boolean DEFAULT_USE_CUSTOM_DOWNLOADER = false;
 
     public static final AdvancedSetup DEFAULT_ADVANCED_SETUP = new AdvancedSetup();
 
     static {
         DEFAULT_ADVANCED_SETUP.setResolveBeforeLaunch(DEFAULT_RESOLVE_BEFORE_LAUNCH);
         DEFAULT_ADVANCED_SETUP.setUseExtendedResolveId(DEFAULT_USE_EXTENDED_RESOLVE_ID);
+        DEFAULT_ADVANCED_SETUP.setUseCustomDownloader(DEFAULT_USE_CUSTOM_DOWNLOADER);
     }
 
     public static final int DEFAULT_RESOLVE_ON_STARTUP = 1;

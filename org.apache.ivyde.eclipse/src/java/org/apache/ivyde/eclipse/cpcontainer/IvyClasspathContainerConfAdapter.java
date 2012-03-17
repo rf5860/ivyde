@@ -220,6 +220,9 @@ public final class IvyClasspathContainerConfAdapter {
             } else if (parameter[0].equals("useExtendedResolveId")) {
                 advancedSetup.setUseExtendedResolveId(Boolean.valueOf(value).booleanValue());
                 conf.setAdvancedProjectSpecific(true);
+            } else if (parameter[0].equals("useCustomDownloader")) {
+                advancedSetup.setUseCustomDownloader(Boolean.valueOf(value).booleanValue());
+                conf.setAdvancedProjectSpecific(true);
             }
         }
         if (conf.isAdvancedProjectSpecific()) {
