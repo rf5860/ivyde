@@ -7,9 +7,8 @@ import org.apache.ivyde.eclipse.IvyPlugin;
 import org.apache.ivyde.eclipse.retrieve.CustomDownloaderSetup;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -24,8 +23,7 @@ public class CustomDownloaderComposite extends Composite {
 	
 	public CustomDownloaderComposite(Composite parent, int style) {
 		super(parent, style);
-		
-        FormLayout layout = new FormLayout();;
+		GridLayout layout = new GridLayout(2, false);
         setLayout(layout);
         
         downloaderPath = new PathEditor(this, SWT.NONE, "Downloader path:", null, "*.exe") {
@@ -38,36 +36,33 @@ public class CustomDownloaderComposite extends Composite {
                  }
              }
          };
-
-         FormData formData = new FormData();
-         formData.left = new FormAttachment(0, 0);
-         formData.top = new FormAttachment(0, 0);
-         formData.right = new FormAttachment(100);
-         downloaderPath.setLayoutData(formData);
+         
+         downloaderPath.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
                   
          Label label = new Label(this, SWT.NONE);
          label.setText("Downloader arguments: ");
          
-         formData = new FormData();
-         formData.left = new FormAttachment(0, 0);
-         formData.top = new FormAttachment(downloaderPath, 3);
-         label.setLayoutData(formData);
-         
-         downloaderArgumentsText = new Text(this, SWT.SINGLE | SWT.BORDER);
+         downloaderArgumentsText = new Text(this, SWT.SINGLE | SWT.BORDER | SWT.FILL);
          downloaderArgumentsText.setToolTipText(TOOLTIP_DOWNLOADER_ARGUMENTS);
-         
-         formData = new FormData();
-         formData.left = new FormAttachment(label);
-         formData.top = new FormAttachment(downloaderPath);
-         formData.right = new FormAttachment(100);
-         downloaderArgumentsText.setLayoutData(formData);
 	}
 	
 	public void init(CustomDownloaderSetup setup) {
+		downloaderArgumentsText.setText(setup.getDownloaderArguments());
+		downloaderPath.getText().setText(setup.getDownloaderPath());
         setEnabled(true);
     }
 	
 	public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
+        downloaderArgumentsText.setEnabled(enabled);
+        downloaderPath.setEnabled(enabled);
     }
+	
+	public CustomDownloaderSetup getCustomDownloaderSetup() {
+		CustomDownloaderSetup customDownloaderSetup = new CustomDownloaderSetup();
+		customDownloaderSetup.setDownloaderArguments(downloaderArgumentsText.getText());
+		customDownloaderSetup.setDownloaderPath(downloaderPath.getText().getText());
+		
+		return customDownloaderSetup;
+	}
 }

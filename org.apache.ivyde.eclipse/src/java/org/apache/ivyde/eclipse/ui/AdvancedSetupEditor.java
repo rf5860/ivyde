@@ -27,8 +27,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 public class AdvancedSetupEditor extends Composite {
-	
-	private static final int INDENT_RETRIEVE = 60;
 
     private Button resolveBeforeLaunchCheck;
 
@@ -77,6 +75,7 @@ public class AdvancedSetupEditor extends Composite {
     public void init(AdvancedSetup setup, boolean forceResolveBeforeLaunch) {
         resolveBeforeLaunchCheck.setSelection(setup.isResolveBeforeLaunch());
         useExtendedResolveIdCheck.setSelection(setup.isUseExtendedResolveId());
+        useCustomDownloader.setSelection(setup.isUseCustomDownloader());
         customDownloaderComposite.init(setup.getCustomDownloaderSetup());
         customDownloaderComposite.setEnabled(setup.isUseCustomDownloader());
 
@@ -91,15 +90,16 @@ public class AdvancedSetupEditor extends Composite {
         AdvancedSetup setup = new AdvancedSetup();
         setup.setResolveBeforeLaunch(resolveBeforeLaunchCheck.getSelection());
         setup.setUseExtendedResolveId(useExtendedResolveIdCheck.getSelection());
-        if (setup.isUseCustomDownloader()) {
-//            setup.setRetrieveSetup(customDownloaderComposite.getRetrieveSetup());
-        }
+        setup.setUseCustomDownloader(useCustomDownloader.getSelection());
+        setup.setCustomDownloaderSetup(customDownloaderComposite.getCustomDownloaderSetup());
         return setup;
     }
 
     public void setEnabled(boolean enabled) {
         resolveBeforeLaunchCheck.setEnabled(enabled);
         useExtendedResolveIdCheck.setEnabled(enabled);
+        useCustomDownloader.setEnabled(enabled);
+        customDownloaderComposite.setEnabled(enabled);
         super.setEnabled(enabled);
     }
 }
