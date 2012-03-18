@@ -4,12 +4,12 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import org.apache.ivyde.eclipse.IvyPlugin;
-import org.apache.ivyde.eclipse.cpcontainer.AdvancedSetup;
+import org.apache.ivyde.eclipse.retrieve.CustomDownloaderSetup;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -17,8 +17,6 @@ import org.eclipse.swt.widgets.Text;
 public class CustomDownloaderComposite extends Composite {
 	
 	public static final String TOOLTIP_DOWNLOADER_ARGUMENTS = "Command line parameters to pass to the custom downlodaer";
-	
-    private Button useCustomDownloader;
     
     private PathEditor downloaderPath;
     
@@ -26,17 +24,9 @@ public class CustomDownloaderComposite extends Composite {
 	
 	public CustomDownloaderComposite(Composite parent, int style) {
 		super(parent, style);
-        GridLayout layout = new GridLayout(2, false);
-        layout.marginHeight = 0;
-        layout.marginWidth = 0;
+		
+        FormLayout layout = new FormLayout();;
         setLayout(layout);
-        
-        useCustomDownloader = new Button(this, SWT.CHECK);
-        useCustomDownloader.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
-                false));
-        useCustomDownloader.setText("Use custom downloader");
-        useCustomDownloader
-                .setToolTipText("Use an external program to download files during a retrieve");
         
         downloaderPath = new PathEditor(this, SWT.NONE, "Downloader path:", null, "*.exe") {
             protected void setFile(String f) {
@@ -48,23 +38,36 @@ public class CustomDownloaderComposite extends Composite {
                  }
              }
          };
-         downloaderPath.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, false));
-         
+
+         FormData formData = new FormData();
+         formData.left = new FormAttachment(0, 0);
+         formData.top = new FormAttachment(0, 0);
+         formData.right = new FormAttachment(100);
+         downloaderPath.setLayoutData(formData);
+                  
          Label label = new Label(this, SWT.NONE);
-         label.setText("Downloader arguments:");
+         label.setText("Downloader arguments: ");
+         
+         formData = new FormData();
+         formData.left = new FormAttachment(0, 0);
+         formData.top = new FormAttachment(downloaderPath, 3);
+         label.setLayoutData(formData);
          
          downloaderArgumentsText = new Text(this, SWT.SINGLE | SWT.BORDER);
-         downloaderArgumentsText.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, false));
          downloaderArgumentsText.setToolTipText(TOOLTIP_DOWNLOADER_ARGUMENTS);
+         
+         formData = new FormData();
+         formData.left = new FormAttachment(label);
+         formData.top = new FormAttachment(downloaderPath);
+         formData.right = new FormAttachment(100);
+         downloaderArgumentsText.setLayoutData(formData);
 	}
 	
-	public void init(AdvancedSetup setup) {
-        useCustomDownloader.setSelection(setup.isUseCustomDownloader());
+	public void init(CustomDownloaderSetup setup) {
         setEnabled(true);
     }
 	
 	public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        useCustomDownloader.setEnabled(enabled);
     }
 }

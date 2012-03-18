@@ -17,6 +17,9 @@
  */
 package org.apache.ivyde.eclipse.cpcontainer;
 
+import org.apache.ivyde.eclipse.retrieve.CustomDownloaderSetup;
+import org.apache.ivyde.eclipse.retrieve.RetrieveSetup;
+
 public class AdvancedSetup {
 
     private boolean resolveBeforeLaunch;
@@ -24,6 +27,8 @@ public class AdvancedSetup {
     private boolean useExtendedResolveId;
     
     private boolean useCustomDownloader;
+    
+    private CustomDownloaderSetup customDownloaderSetup = new CustomDownloaderSetup();
 
     public AdvancedSetup() {
         // default constructor
@@ -33,6 +38,7 @@ public class AdvancedSetup {
         this.resolveBeforeLaunch = setup.resolveBeforeLaunch;
         this.useExtendedResolveId = setup.useExtendedResolveId;
         this.useCustomDownloader = setup.useCustomDownloader;
+        this.customDownloaderSetup.set(setup.customDownloaderSetup);
     }
 
     public boolean isResolveBeforeLaunch() {
@@ -57,5 +63,13 @@ public class AdvancedSetup {
     
     public void setUseCustomDownloader(boolean useCustomDownloader) {
         this.useCustomDownloader = useCustomDownloader;
+    }
+    
+    public CustomDownloaderSetup getCustomDownloaderSetup() {
+        return customDownloaderSetup;
+    }
+
+    public void setCustomDownloaderSetup(CustomDownloaderSetup customDownloaderSetup) {
+        this.customDownloaderSetup = customDownloaderSetup;
     }
 }
