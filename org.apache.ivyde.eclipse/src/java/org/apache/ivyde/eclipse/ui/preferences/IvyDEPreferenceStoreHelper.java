@@ -22,6 +22,7 @@ import org.apache.ivyde.eclipse.cpcontainer.ClasspathSetup;
 import org.apache.ivyde.eclipse.cpcontainer.IvyClasspathUtil;
 import org.apache.ivyde.eclipse.cpcontainer.MappingSetup;
 import org.apache.ivyde.eclipse.cpcontainer.SettingsSetup;
+import org.apache.ivyde.eclipse.retrieve.CustomDownloaderSetup;
 import org.apache.ivyde.eclipse.retrieve.RetrieveSetup;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -141,6 +142,7 @@ public class IvyDEPreferenceStoreHelper {
                 .getBoolean(PreferenceConstants.USE_EXTENDED_RESOLVE_ID));
         setup.setUseCustomDownloader(prefStore
                 .getBoolean(PreferenceConstants.USE_CUSTOM_DOWNLOADER));
+        setup.setCustomDownloaderSetup(getCustomDownloaderSetup());
         return setup;
     }
 
@@ -151,6 +153,19 @@ public class IvyDEPreferenceStoreHelper {
             setup.isUseExtendedResolveId());
         prefStore.setValue(PreferenceConstants.USE_CUSTOM_DOWNLOADER,
                 setup.isUseCustomDownloader());
+        setCustomDownloaderSetup(setup.getCustomDownloaderSetup());
+    }
+
+    public CustomDownloaderSetup getCustomDownloaderSetup() {
+    	CustomDownloaderSetup setup = new CustomDownloaderSetup();
+        setup.setDownloaderPath(prefStore.getString(PreferenceConstants.CUSTOM_DOWNLOADER_PATH));
+        setup.setDownloaderArguments(prefStore.getString(PreferenceConstants.CUSTOM_DOWNLOADER_ARGUMENTS));
+    	return setup;
+    }
+    
+    public void setCustomDownloaderSetup(CustomDownloaderSetup setup) {
+    	prefStore.setValue(PreferenceConstants.CUSTOM_DOWNLOADER_ARGUMENTS, setup.getDownloaderArguments());
+    	prefStore.setValue(PreferenceConstants.CUSTOM_DOWNLOADER_PATH, setup.getDownloaderPath());
     }
 
     public String getOrganization() {

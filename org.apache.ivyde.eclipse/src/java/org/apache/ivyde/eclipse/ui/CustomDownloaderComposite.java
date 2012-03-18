@@ -44,6 +44,7 @@ public class CustomDownloaderComposite extends Composite {
          
          downloaderArgumentsText = new Text(this, SWT.SINGLE | SWT.BORDER | SWT.FILL);
          downloaderArgumentsText.setToolTipText(TOOLTIP_DOWNLOADER_ARGUMENTS);
+         downloaderArgumentsText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 	}
 	
 	public void init(CustomDownloaderSetup setup) {

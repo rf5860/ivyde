@@ -71,6 +71,10 @@ public final class PreferenceConstants {
     public static final String USE_EXTENDED_RESOLVE_ID = "useExtendedResolveId";
     
     public static final String USE_CUSTOM_DOWNLOADER = "useCustomDownloader";
+    
+    public static final String CUSTOM_DOWNLOADER_PATH = "customDownloaderPath";
+    
+    public static final String CUSTOM_DOWNLOADER_ARGUMENTS = "customDownloaderArguments";
 
     public static final String PROPERTY_FILES = "propertyFiles";
 
